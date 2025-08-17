@@ -5,6 +5,7 @@
 #
 
 import generate_links
+import downloader
 from collections import defaultdict
 
 def main():
@@ -90,26 +91,27 @@ def main():
     while True:
         choice = input("\nSelect a station (enter a number): ")
         if not choice.isdigit():
-            print("Station not found. Retry.")
+            print("\nStation not found. Retry.")
             continue
 
         choice = int(choice)
         if choice not in options_mapping:
-            print("Station not found. Retry.")
+            print("\nStation not found. Retry.")
             continue
 
         if options_mapping[choice] is None:
-            print("Halting process.")
+            print("\nHalting process.")
             break
 
         selected_station = options_mapping[choice]
-        print(f"You selected: {selected_station['name']}")
+        print(f"\nYou selected: {selected_station['name']}")
         break
 
     # ===============================================================================================
 
     if 'selected_station' in locals():
-        generate_links.generate_urls(selected_station)
+        urls_temp_file_path = generate_links.generate_urls(selected_station)
+        downloader.download_station_urls(selected_station['id'], selected_station['name'], urls_temp_file_path)
 
 
 if __name__ == "__main__":

@@ -52,6 +52,7 @@ def generate_urls(station):
 
         print(f"\n====================================================\n\nGenerated {len(urls)} URLs.\nURL list temp file located at {urls_temp_file}")
 
+        return urls_temp_file
 
 
 def fetch_track_list(station):
