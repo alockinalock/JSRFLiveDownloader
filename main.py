@@ -4,20 +4,20 @@
 #       Handles the user side of the program in console.
 #
 
-import generate_links
-import downloader
+from src import generate_links
+from src import downloader
+from src import decoder
 from collections import defaultdict
 
 def main():
     stations = [
-
         {"id": "brc", "name": "Bomb Rush Cyberfunk", "category": "New Stations"},
         {"id": "sonicrush", "name": "Sonic-Rush", "category": "New Stations"},
         {"id": "summer", "name": "Summer", "category": "New Stations"},
         {"id": "turntablism", "name": "Turntablism", "category": "New Stations"},
         {"id": "olliolliworld", "name": "Olliolli World", "category": "New Stations"},
 
-        # Game OSTs
+
         {"id": "classic", "name": "Jet Set Radio Classic", "category": "Game OSTs"},
         {"id": "future", "name": "Jet Set Radio Future", "category": "Game OSTs"},
 
@@ -100,11 +100,11 @@ def main():
             continue
 
         if options_mapping[choice] is None:
-            print("\nHalting process.")
+            print("\n====================================================\n\nHalting process.\n\n====================================================\n")
             break
 
         selected_station = options_mapping[choice]
-        print(f"\nYou selected: {selected_station['name']}")
+        print(f"You selected: {selected_station['name']}")
         break
 
     # ===============================================================================================
@@ -112,6 +112,7 @@ def main():
     if 'selected_station' in locals():
         urls_temp_file_path = generate_links.generate_urls(selected_station)
         downloader.download_station_urls(selected_station['id'], selected_station['name'], urls_temp_file_path)
+        decoder.decode_songs(selected_station['name'])
 
 
 if __name__ == "__main__":
