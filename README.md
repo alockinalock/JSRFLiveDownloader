@@ -1,2 +1,2 @@
 # JSRFLiveDownloader
-Download the audio files from the jetsetradiofuture.live website
+Downloads the audio files from the jetsetradiofuture.live website
